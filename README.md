@@ -1,5 +1,5 @@
 # TP-NLP-using-Python
-TP TAL - NLP - Python
+Travaux Pratiques TAL - NLP - Python
 
 **Option 1** :
   - Pour télécharger et installer Python 3 : https://www.python.org/downloads/
