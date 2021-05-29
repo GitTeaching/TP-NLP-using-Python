@@ -35,6 +35,7 @@ print(porter.stem("cats"))
 print(porter.stem("trouble"))
 print(porter.stem("troubling"))
 print(porter.stem("troubled"))
+print(porter.stem("probably"))
 
 # - Stemming a word - LancasterStemmer 
 print("Lancaster Stemmer")
@@ -42,24 +43,28 @@ print(lancaster.stem("cats"))
 print(lancaster.stem("trouble"))
 print(lancaster.stem("troubling"))
 print(lancaster.stem("troubled"))
+print(lancaster.stem("probably"))
 
 # ---------------------------
 
 # - Stemming a list of words
 word_list = ["friend", "friendship", "friends", "friendships","stabil","destabilize","misunderstanding","railroad","moonlight","football"]
-print("{0:20}{1:20}{2:20}".format("Word","Porter Stemmer","lancaster Stemmer"))
+print("{0:20}{1:20}{2}".format("Word","Porter Stemmer","lancaster Stemmer"))
 for word in word_list:
-    print("{0:20}{1:20}{2:20}".format(word, porter.stem(word), lancaster.stem(word)))
+    print("{0:20}{1:20}{2}".format(word, porter.stem(word), lancaster.stem(word)))
 
 # ---------------------------
 
 # - Stemming a sentence without tokenization
 sentence = "Pythoners are very intelligent and work very pythonly and now they are pythoning their way to success."
 porter.stem(sentence)
+lancaster.stem(sentence)
 
 # ---------------------------
 
 # - Stemming a sentence with word tokenization (punctuations are keeped with word_tokenizer)
+
+nltk.download('punkt')
 
 sentence = "Pythoners are very intelligent and work very pythonly and now they are pythoning their way to success."
 
@@ -71,8 +76,7 @@ def stemSentence(sentence):
     stem_sentence = []
     for word in token_words:
         stem_sentence.append(porter.stem(word))
-        stem_sentence.append(" ")
-    return "".join(stem_sentence)
+    return " ".join(stem_sentence)
 
 stems = stemSentence(sentence)
 print('Stems: ', stems)
@@ -91,14 +95,14 @@ sentence = "Pythoners are very intelligent, and work very pythonly and now they 
 
 def cleanStemSentence(sentence):
     token_words = word_tokenize(sentence)
+    print('Tokens - before:', token_words)
     # eliminate the stop words from the tokens
     clean_tokens = [token for token in token_words if token not in sw]
-    print('Tokens:', clean_tokens)
+    print('Tokens - after:', clean_tokens)
     stem_sentence = []
     for word in clean_tokens:
         stem_sentence.append(porter.stem(word))
-        stem_sentence.append(" ")
-    return "".join(stem_sentence)
+    return " ".join(stem_sentence)
 
 stems = cleanStemSentence(sentence)
 print('Stems: ', stems)
@@ -107,20 +111,18 @@ print('Stems: ', stems)
 
 # - Stemming a sentence with word tokenization (remove punctuations with RegexpTokenizer)
 
-tokenizer = RegexpTokenizer(r'\w+')
-
 sentence = "Pythoners are very intelligent and work very pythonly and now they are pythoning their way to success."
 
 def stemSentence(sentence):
 	# Tokenization
+	tokenizer = RegexpTokenizer(r'\w+')
     token_words = tokenizer.tokenize(sentence)
     print('Tokens:', token_words)
     # Stemming
     stem_sentence = []
     for word in token_words:
         stem_sentence.append(porter.stem(word))
-        stem_sentence.append(" ")
-    return "".join(stem_sentence)
+    return " ".join(stem_sentence)
 
 stems = stemSentence(sentence)
 print('Stems: ', stems)
@@ -132,15 +134,14 @@ print('Stems: ', stems)
 with open("my_text.txt") as file:
 	my_lines_list = file.readlines()
 
-porter = PorterStemmer()
+# my_lines_list = ['He was running and eating at same time.', 'He has bad habit of swimming after playing long hours in the Sun.']
 
 def stemSentence(sentence):
     token_words = word_tokenize(sentence)
     stem_sentence=[]
     for word in token_words:
         stem_sentence.append(porter.stem(word))
-        stem_sentence.append(" ")
-    return "".join(stem_sentence)
+    return " ".join(stem_sentence)
 
 # Stemming the first line of the document
 stems = stemSentence(my_lines_list[0])
@@ -158,6 +159,9 @@ for line in my_lines_list:
 
 # Lemmatization using WordNet Lemmatizer, with and without context - POS
 
+# download wordnet
+nltk.download('wordnet')
+
 # Instantiating the lemmaztizer object
 lemmatizer = WordNetLemmatizer()
 
@@ -170,6 +174,7 @@ print(lemmatizer.lemmatize("are"))
 
 # - Lemmatize a single word with context :parts-of-speech (POS) parameter 
 print(lemmatizer.lemmatize("are", pos='v'))
+print(lemmatizer.lemmatize("swimming", pos='v'))
 print(lemmatizer.lemmatize("swimming", pos='n'))
 print(lemmatizer.lemmatize("stripes", pos='v')) 
 print(lemmatizer.lemmatize("stripes", pos='n'))
@@ -187,11 +192,6 @@ sentence_words = tokenizer.tokenize(sentence)
 print("{0:20}{1:20}".format("Word","Lemma"))
 for word in sentence_words:
     print ("{0:20}{1:20}".format(word, lemmatizer.lemmatize(word)))
-
-
-# with context : parts-of-speech (POS) parameter = V
-for word in sentence_words:
-    print ("{0:20}{1:20}".format(word, lemmatizer.lemmatize(word, pos="v")))
 
 
 # ---------------------------
