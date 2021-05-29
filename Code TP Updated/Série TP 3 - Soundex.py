@@ -49,5 +49,5 @@ def soundex(name):
 words =[ "physique", "physik", "phosphore", "fosfor", "rupert", "rubert", "hello"]
 for word in words :
     print('Word : ', word)
-    code = soundex(word.lower())
+    code = soundex(word)
     print('Soundex Code: ', code, end='\n\n')
