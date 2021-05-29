@@ -1,4 +1,3 @@
-
 # Soundex
 # Make dictionary numerics to map each letter to its group
 groups = ['aehiouwy', #0
@@ -23,6 +22,8 @@ def soundex(name):
     firstchar = name[0].upper()
     name = name[1:] # le reste du mot
     
+    print(firstchar)
+
     # translate alpha chars in name to soundex digits
     for c in name.lower():
         d = numerics.get(c, '0')
@@ -40,13 +41,13 @@ def soundex(name):
     # return soundex code padded to len characters
     sndx = sndx + '0000'
     print(sndx)
+    
     return sndx[:4]
 
 
 # test it
-words =[ "physique", "physik", "phosphore", "fosfor", "rupert", "rubert" ]
+words =[ "physique", "physik", "phosphore", "fosfor", "rupert", "rubert", "hello"]
 for word in words :
+    print('Word : ', word)
     code = soundex(word.lower())
-    print("%s %s" % (code, word))
-    
-    
+    print('Soundex Code: ', code, end='\n\n')
