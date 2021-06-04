@@ -9,4 +9,4 @@ Travaux Pratiques TAL - NLP - Python
   - Cliquer sur les fichiers .ipynb, puis sur le bouton en bleu Open in Colab (un compte Gmail est requis).
   - Démo vidéo : https://www.youtube.com/watch?v=qZiN0dzx8ag
 
-Les résultats des exécutions sont dans les fichiers .ipynb
+Les résultats des exécutions sont dans les fichiers notebook .ipynb
