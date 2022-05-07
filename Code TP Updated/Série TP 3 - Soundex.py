@@ -20,7 +20,7 @@ def soundex(name):
     # digits holds the soundex values for the alphabet
     sndx = ''
     firstchar = name[0].upper()
-    name = name[1:] # le reste du mot
+    # name = name[1:] # le reste du mot
     
     print(firstchar)
 
@@ -33,7 +33,7 @@ def soundex(name):
             sndx += d
             
     # replace first digit with first alpha character
-    sndx = firstchar + sndx
+    sndx = firstchar + sndx[1:]
     
     # remove all 0s from the soundex code
     sndx = sndx.replace('0','')
@@ -46,7 +46,7 @@ def soundex(name):
 
 
 # test it
-words =[ "physique", "physik", "phosphore", "fosfor", "rupert", "rubert", "hello"]
+words =[ "physique", "physik", "phosphore", "fosfor", "rupert", "rubert", "smith", "schmidt", "jackson"]
 for word in words :
     print('Word : ', word)
     code = soundex(word)
